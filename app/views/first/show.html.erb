@@ -1,0 +1,195 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<style>
+input[type=text], select {
+  width: 10%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+div {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+</style>
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup Form</title>
+</head>
+<body>
+    <h2>Signup Form</h2>
+   <div align="center"> 
+    <form  id="form"  action="/submit_signup" method="post">
+        <label for="name" >Name: </label><br>
+        <input type="text" id="name" name="name"  placeholder="Your name.." required 
+        onmouseover="this.style.backgroundColor='yellow'" onmouseout="this.style.backgroundColor='white'" ><br><br>
+
+        <p id="nameerror" > </p>
+         <p id="nameerror2" > </p>
+        
+        <label for="age">Age:</label><br>
+        <input type="number" id="age" name="age"   placeholder="Your age.." required 
+        onmouseover="this.style.backgroundColor='yellow'" onmouseout="this.style.backgroundColor='white'"><br><br>
+        
+        <p id=showerror></p>
+
+        <label for="dob">Date of Birth:</label><br>
+        <input type="date" id="dob" name="dob"  required 
+        onmouseover="this.style.backgroundColor='yellow'" onmouseout="this.style.backgroundColor='white'"> <br><br>
+        
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email"   placeholder="Your email.." required 
+        onmouseover="this.style.backgroundColor='yellow'" onmouseout="this.style.backgroundColor='white'"><br><br>
+         <p id=mail></p>
+
+
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password"  placeholder="Your Password.." required 
+        onmouseover="this.style.backgroundColor='yellow'" onmouseout="this.style.backgroundColor='white'"><br><br>
+         <p id=pass></p>
+
+        <button type="button"   onclick= "isvalid()"  onmouseover="this.style.backgroundColor='skyblue'"  onmouseout= "this.style.backgroundColor='white'"  >Sign Up</button>
+    </form>
+
+</div>
+<script>
+
+window.onload = function() 
+	{
+	
+
+            // Get the form element
+            var form = document.getElementById('form');
+            
+            // Reset the form, clearing all inputs
+            form.reset();
+        }
+
+ function isvalid() 
+{
+
+
+
+	//for email
+	 
+
+	//for name validation
+	let toshow=document.getElementById('nameerror');
+
+	var text=document.getElementById('name').value;
+	x=text.length;
+
+		var req = (x==null || x=='') ?  true : false;
+		var short =(x<=3) ?  true : false;
+		var long= (x>=10) ?  true : false;
+		toshow.innerHTML = '';
+
+		if(req==true)
+		{
+			toshow.innerHTML += "Input is required ";
+		}
+		if(short==true)
+		{
+			toshow.innerHTML += " Input is too short ";
+		}
+
+		
+
+
+
+
+
+//for email
+	var mail=document.getElementById('mail')
+	var text=document.getElementById('email').value;
+	
+	if(text==null || text=='')
+		{
+			mail.innerHTML="required ";
+		}
+
+
+var emailInput = document.getElementById('email');
+            
+            // Regular expression pattern for email validation
+            var emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i;
+            
+            // Validate the email format
+            if (!emailPattern.test(emailInput.value))
+            {
+            	mail.innerHTML +="wrong Pattern";
+            }
+
+
+//for password
+
+	let pass=document.getElementById('pass')
+	var p=document.getElementById('password').value;
+	
+	if(p==null || p=='')
+		{
+			pass.innerHTML="required ";
+		}
+
+
+
+//for age validation
+	
+	const message=document.getElementById('showerror');
+	var x= document.getElementById('age').value;
+
+	try 
+	  { 
+    if(x.trim() == "")  throw "empty";
+    
+    //x = Number(x);
+    if(x<=0) throw "-ive or zero not allowed."
+    if(x < 5)  throw "too low";
+    if(x > 10)   throw "too high";
+  }
+  catch(err) 
+  {
+    message.innerHTML = "Input is " + err;
+  }
+
+
+}
+//	"this.innerHTML= 'Form is Submitted Successfuly'"
+// <div ="this.style.backgroundColor='red'">myDIV.</div>
+//onclick="alert('Submitted Successfuly') "
+//onclick="this.style.backgroundColor='green'
+
+
+
+</script>
+
+
+</body>
+</html>
